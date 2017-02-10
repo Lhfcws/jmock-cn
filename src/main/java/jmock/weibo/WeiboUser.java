@@ -6,6 +6,7 @@ import weibo4j.model.User;
 import weibo4j.model.WeiboException;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 /**
  * jmock.weibo.WeiboUser
@@ -18,7 +19,7 @@ public class WeiboUser implements Serializable {
         User user = null;
         try {
             user = new User(null);
-            Fairy fairy = Fairy.create();
+            Fairy fairy = Fairy.create(Locale.CHINA);
             String uid = fairy.baseProducer().numerify("##########");
             user.setId(Long.valueOf(uid));
             user.setCreatedAt(fairy.dateProducer().randomDateBetweenYearAndNow(0).toDate());
@@ -34,7 +35,7 @@ public class WeiboUser implements Serializable {
             user.setVerified(fairy.baseProducer().trueOrFalse());
             user.setName(fairy.person().getFirstName());
             user.setScreenName(user.getName());
-            user.setUrl(fairy.company().getUrl());
+            user.setUrl(fairy.networkProducer().url());
             user.setGender(fairy.baseProducer().randomElement("m", "f"));
             user.setLocation(ChineseCityNProvProducer.getProvStr(pair.getKey()) + " " + ChineseCityNProvProducer.getCityStr(pair.getKey(), pair.getValue()));
             return user;

@@ -1,5 +1,6 @@
 package jmock.example;
 
+import jmock.util.GsonSerializer;
 import jmock.weibo.Weibo;
 import jmock.weibo.WeiboUser;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class WeiboFakeExample {
         // 带用户带转发    with retweet, with user
         Status status4 = Weibo.createStatusWithUserNRetweet();
 
-        System.out.println(status4);
+        System.out.println(GsonSerializer.serialize(status4));
     }
 
     @Test

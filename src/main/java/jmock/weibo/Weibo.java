@@ -8,6 +8,7 @@ import weibo4j.model.User;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -21,7 +22,7 @@ public class Weibo implements Serializable {
         Status status = new Status();
         Random r = new Random();
         Date date = new Date();
-        Fairy fairy = Fairy.create();
+        Fairy fairy = Fairy.create(Locale.CHINA);
         BaseProducer baseProducer = fairy.baseProducer();
         DateProducer dateProducer = fairy.dateProducer();
 
@@ -32,7 +33,7 @@ public class Weibo implements Serializable {
         status.setId(Long.valueOf(status.getMid()));
         status.setCreatedAt(dateProducer.randomDateBetweenYearAndNow(date.getYear()).toDate());
         status.setFavorited(baseProducer.trueOrFalse());
-        status.setText(fairy.textProducer().text());
+        status.setText(fairy.textProducer().sentence(baseProducer.randomBetween(5, 14)));
 
         return status;
     }

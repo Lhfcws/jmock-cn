@@ -9,7 +9,7 @@ class IPNumberProducer {
 	private static final String IP_FORMAT = "%s.%s.%s.%s";
 	private static final int MAX = 0xFF;
 
-	private final BaseProducer baseProducer;
+	final BaseProducer baseProducer;
 
 	@Inject
 	public IPNumberProducer(BaseProducer baseProducer) {

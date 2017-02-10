@@ -36,7 +36,6 @@ public class ChineseCityNProvProducer {
             String areaJson = IOUtils.toString(inputStream);
             if (areaJson != null) {
                 AreaJson obj = GsonSerializer.deserialize(areaJson, AreaJson.class);
-                System.out.println(obj);
                 List<AreaJsonProvinceEntry> plist = obj.get("provinces");
                 for (AreaJsonProvinceEntry pe : plist) {
                     prov.put(pe.getId(), pe.getName());

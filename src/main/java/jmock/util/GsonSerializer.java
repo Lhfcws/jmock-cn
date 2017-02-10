@@ -76,7 +76,7 @@ public class GsonSerializer {
      * @return 对象序列化后的json字符串
      */
     public static <T> String toJson(T obj) {
-        if (obj.toString().equals(obj))
+        if (obj instanceof String)
             return obj.toString();
         return getGson().toJson(obj);
     }
