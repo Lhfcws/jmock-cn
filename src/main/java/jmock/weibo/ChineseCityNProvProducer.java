@@ -1,8 +1,8 @@
 package jmock.weibo;
 
 import io.codearte.jfairy.producer.BaseProducer;
+import jmock.util.GsonSerializer;
 import org.apache.commons.io.IOUtils;
-import jmock.util.FastJsonSerializer;
 import jmock.util.Pair;
 
 import java.io.IOException;
@@ -11,7 +11,9 @@ import java.util.*;
 
 /**
  * jmock.weibo.ChineseCityNProvProducer
- *
+ * Produce chinese city and province names or ids.
+ * The ids are compatible with China Identification Card location system.
+ * If you have a Chinese ID card, plz check it out your self.
  * @author lhfcws
  * @since 2017/2/7
  */
@@ -30,10 +32,11 @@ public class ChineseCityNProvProducer {
     private static void init() {
         // init area json by resource file area.json
         try {
-            InputStream inputStream = ChineseCityNProvProducer.class.getResourceAsStream("area.json");
+            InputStream inputStream = ChineseCityNProvProducer.class.getClassLoader().getResourceAsStream("area.json");
             String areaJson = IOUtils.toString(inputStream);
             if (areaJson != null) {
-                AreaJson obj = FastJsonSerializer.deserialize(areaJson, AreaJson.class);
+                AreaJson obj = GsonSerializer.deserialize(areaJson, AreaJson.class);
+                System.out.println(obj);
                 List<AreaJsonProvinceEntry> plist = obj.get("provinces");
                 for (AreaJsonProvinceEntry pe : plist) {
                     prov.put(pe.getId(), pe.getName());
@@ -104,6 +107,15 @@ public class ChineseCityNProvProducer {
 
         public void setCitys(List<HashMap<String, String>> citys) {
             this.citys = citys;
+        }
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", citys=" + citys +
+                    '}';
         }
     }
 }

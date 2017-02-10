@@ -1,7 +1,11 @@
 package jmock.test;
 
+import io.codearte.jfairy.Fairy;
+import io.codearte.jfairy.producer.text.TextProducer;
 import jmock.common.EntertainProducer;
 import org.junit.Test;
+
+import java.util.Locale;
 
 /**
  * jmock.test.TestProducer
@@ -25,5 +29,14 @@ public class TestProducer {
             System.out.println(entertainProducer.getRandomTvshow());
             System.out.println(entertainProducer.getRandomDrama());
         }
+    }
+
+    @Test
+    public void testTextProducer() {
+        Fairy fairy = Fairy.create(Locale.CHINA);
+        TextProducer textProducer = fairy.textProducer();
+        System.out.println(textProducer.text());
+        System.out.println(textProducer.word());
+        System.out.println(textProducer.paragraph());
     }
 }
